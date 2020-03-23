@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Cd;
 
 class CdController extends Controller
 {
@@ -13,7 +14,9 @@ class CdController extends Controller
      */
     public function index()
     {
-        //
+    $cds = Cd::all();
+    dd($cds);
+
     }
 
     /**
@@ -23,7 +26,7 @@ class CdController extends Controller
      */
     public function create()
     {
-        //
+    return view('cds.create');
     }
 
     /**
@@ -34,7 +37,21 @@ class CdController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    $data = $request->all();
+    $cd = new Cd;
+    $cd->name = $data['name'];
+    $cd->artist = $data['artist'];
+    $cd->year = $data['year'];
+    $cd->songs_number = $data['songs_number'];
+    $cd->genre = $data['genre'];
+
+    $saved = $cd->save();
+
+    if ($saved) {
+    return redirect()->route('cds.index');
+    }
+
+
     }
 
     /**
