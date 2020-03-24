@@ -62,6 +62,9 @@ class CdController extends Controller
      */
     public function show(Cd $cd)
     {
+      if(empty($cd)) {
+          abort('404');
+      }
     return view('cds.show', compact('cd'));
     }
 
@@ -71,10 +74,15 @@ class CdController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Cd $cd)
     {
-        //
+      if(empty($cd)) {
+          abort('404');
+      }
+    return view('cds.edit', compact('cd'));
     }
+
+
 
     /**
      * Update the specified resource in storage.
@@ -85,7 +93,18 @@ class CdController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $cd = Cd::find($id);
+          if(empty($cd)) {
+              abort('404');
+          }
+
+          $data = $request->all();
+          $updated = $cd->update($data);
+          // dd($updated);
+          if ($updated) {
+              $cd = Cd::find($id);
+              return redirect()->route('cds.show', compact('cd'));
+          }
     }
 
     /**

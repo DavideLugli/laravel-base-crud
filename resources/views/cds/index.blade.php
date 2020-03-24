@@ -8,7 +8,7 @@
     <div class="cd">
       <ul>
         <li>Id: {{$cd->id}}</li>
-        <li>Name: {{$cd->name}}</li>
+        <li>Name: <a href="{{ route('cds.show', $cd->id) }}">{{$cd->name}}</a></li>
         <li>Artist: {{$cd->artist}}</li>
         <li>Year: {{$cd->year}}</li>
         <li>Number of songs: {{$cd->songs_number}}</li>
