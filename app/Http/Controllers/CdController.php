@@ -113,8 +113,15 @@ class CdController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Cd $cd)
     {
-        //
+      $id = $cd->id;
+      $cd->delete();
+      $data = [
+        'id' => $id,
+        'cds' => Cd::all()
+    ];
+      return view('cds.index', $data);
+
     }
 }

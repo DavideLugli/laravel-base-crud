@@ -14,6 +14,13 @@
         <li>Genre: {{$cd->genre}}</li>
         <li>Creato il: {{$cd->created_at}}</li>
         <li>Aggiornato il: {{$cd->updated_at}}</li>
+        <li>
+          <form action="{{route('cds.destroy', $cd->id)}}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit">DELETE</button>
+          </form>
+        </li>
       </ul>
     </div>
 </div>
